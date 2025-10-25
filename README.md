@@ -2,6 +2,9 @@
 
 A comprehensive web3 application for analyzing and monitoring memecoin risks on the Celo blockchain. Protect yourself from rug pulls with real-time AI-powered risk assessment.
 
+<img width="2976" height="1720" alt="image" src="https://github.com/user-attachments/assets/9144f909-4408-47cd-813a-8fd00ecbf5a5" />
+
+
 ## Features
 
 ### Core Functionality
@@ -215,3 +218,4 @@ For issues and questions:
 - [ ] Automated protection features
 - [ ] Historical trend analysis
 - [ ] Social media integration
+
