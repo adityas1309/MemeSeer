@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MemeSeer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 350px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .header {
+      padding: 1.5rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 1.5rem;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stat:last-child {
+      border-bottom: none;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+    }
+
+    .stat-value {
+      font-weight: bold;
+      font-size: 1.125rem;
+    }
+
+    .button {
+      width: 100%;
+      padding: 0.875rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 0.5rem;
+    }
+
+    .button-primary {
+      background: white;
+      color: #667eea;
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .button-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .footer {
+      padding: 1rem 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      opacity: 0.8;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      font-size: 2rem;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">🔮</div>
+    <div class="title">MemeSeer</div>
+    <div class="subtitle">Token Risk Scanner</div>
+  </div>
+
+  <div class="content">
+    <div class="status">
+      <div class="status-dot"></div>
+      <span>Extension Active</span>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Session Stats</div>
+      <div class="stat">
+        <span class="stat-label">Tokens Scanned</span>
+        <span class="stat-value" id="scannedCount">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">High Risk Found</span>
+        <span class="stat-value" id="highRiskCount">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Cache Size</span>
+        <span class="stat-value" id="cacheSize">0</span>
+      </div>
+    </div>
+
+    <button class="button button-primary" id="openDashboard">
+      Open MemeSeer Dashboard
+    </button>
+    
+    <button class="button button-secondary" id="scanCurrentPage">
+      Scan Current Page
+    </button>
+
+    <button class="button button-secondary" id="clearCache">
+      Clear Cache
+    </button>
+  </div>
+
+  <div class="footer">
+    Visit memeseer.com for full analysis
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

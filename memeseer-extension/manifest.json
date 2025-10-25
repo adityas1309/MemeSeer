@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "MemeSeer - Token Risk Scanner",
+  "version": "1.0.0",
+  "description": "See real-time risk scores for tokens on blockchain explorers",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*",
+    "http://localhost:3000/",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000/*",
+    "https://*.blockscout.com/*",
+    "https://blockscout.com/*",
+    "https://celoscan.io/*",
+    "https://explorer.celo.org/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.blockscout.com/token/*",
+        "https://*.blockscout.com/tokens",
+        "https://celoscan.io/token/*",
+        "https://explorer.celo.org/token/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

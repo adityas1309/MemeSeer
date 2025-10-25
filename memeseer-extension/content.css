@@ -1,0 +1,263 @@
+/* MemeSeer Browser Extension Styles */
+
+/* Main Badge (Single Token Page) */
+.memeseer-badge {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 2px solid;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  animation: memeseer-fadein 0.3s ease-out;
+  max-width: 250px;
+}
+
+.memeseer-badge-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.memeseer-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.memeseer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.memeseer-score {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.memeseer-level {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 0.25rem;
+}
+
+.memeseer-label {
+  font-size: 0.875rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.memeseer-view-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+.memeseer-view-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Risk Level Colors */
+.memeseer-low {
+  border-color: #22c55e;
+}
+
+.memeseer-low .memeseer-score,
+.memeseer-low .memeseer-level {
+  color: #16a34a;
+}
+
+.memeseer-low .memeseer-view-btn {
+  background: #22c55e;
+  color: white;
+}
+
+.memeseer-medium {
+  border-color: #eab308;
+}
+
+.memeseer-medium .memeseer-score,
+.memeseer-medium .memeseer-level {
+  color: #ca8a04;
+}
+
+.memeseer-medium .memeseer-view-btn {
+  background: #eab308;
+  color: white;
+}
+
+.memeseer-high {
+  border-color: #f97316;
+}
+
+.memeseer-high .memeseer-score,
+.memeseer-high .memeseer-level {
+  color: #ea580c;
+}
+
+.memeseer-high .memeseer-view-btn {
+  background: #f97316;
+  color: white;
+}
+
+.memeseer-critical {
+  border-color: #ef4444;
+}
+
+.memeseer-critical .memeseer-score,
+.memeseer-critical .memeseer-level {
+  color: #dc2626;
+}
+
+.memeseer-critical .memeseer-view-btn {
+  background: #ef4444;
+  color: white;
+}
+
+/* Loading State */
+.memeseer-loading {
+  border-color: #8b5cf6;
+  padding: 0.75rem 1rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.memeseer-loading .memeseer-score,
+.memeseer-loading .memeseer-level {
+  color: #7c3aed;
+}
+
+.memeseer-spinner {
+  animation: memeseer-spin 1s linear infinite;
+  font-size: 1.5rem;
+}
+
+/* Mini Badge (Token List) */
+.memeseer-mini-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 6px;
+  border: 1.5px solid;
+  background: rgba(255, 255, 255, 0.95);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  animation: memeseer-fadein 0.3s ease-out;
+  vertical-align: middle;
+}
+
+.memeseer-mini-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.memeseer-mini-icon {
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.memeseer-mini-score {
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.memeseer-mini-level {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Mini Badge Colors */
+.memeseer-mini-badge.memeseer-low {
+  border-color: #22c55e;
+  color: #16a34a;
+}
+
+.memeseer-mini-badge.memeseer-medium {
+  border-color: #eab308;
+  color: #ca8a04;
+}
+
+.memeseer-mini-badge.memeseer-high {
+  border-color: #f97316;
+  color: #ea580c;
+}
+
+.memeseer-mini-badge.memeseer-critical {
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+/* Animations */
+@keyframes memeseer-fadein {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes memeseer-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .memeseer-badge,
+  .memeseer-mini-badge {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+  }
+  
+  .memeseer-label {
+    color: #aaa;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .memeseer-badge {
+    max-width: 200px;
+    padding: 0.75rem;
+  }
+  
+  .memeseer-icon {
+    font-size: 1.5rem;
+  }
+  
+  .memeseer-score {
+    font-size: 1.5rem;
+  }
+  
+  .memeseer-mini-badge {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}
