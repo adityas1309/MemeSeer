@@ -1,18 +1,31 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Search, AlertTriangle, CheckCircle, XCircle, Info } from "lucide-react"
 import { useTokenScanner } from "@/hooks/useTokenScanner"
 import { useWatchlist } from "@/hooks/useWatchlist"
+import { useSearchParams } from "next/navigation"
 
 export const TokenScanner = () => {
+  const searchParams = useSearchParams()
   const [tokenAddress, setTokenAddress] = useState("")
   const { analysis, isScanning, error, scanToken, reset } = useTokenScanner()
   const { addToWatchlist, isInWatchlist } = useWatchlist()
 
-  const handleScan = async () => {
-    if (!tokenAddress) return
-    const result = await scanToken(tokenAddress)
+  // Auto-scan when 'scan' parameter is present in URL
+  useEffect(() => {
+    const scanParam = searchParams.get('scan')
+    if (scanParam && !analysis && !isScanning) {
+      setTokenAddress(scanParam)
+      handleScan(scanParam)
+    }
+  }, [searchParams])
+
+  const handleScan = async (address?: string) => {
+    const addressToScan = address || tokenAddress
+    if (!addressToScan) return
+    
+    const result = await scanToken(addressToScan)
     
     // Update leaderboard
     if (result) {
@@ -33,16 +46,24 @@ export const TokenScanner = () => {
     }
   }
 
-  const handleAddToWatchlist = () => {
+  const handleAddToWatchlist = async () => {
     if (!analysis) return
-    addToWatchlist({
-      tokenAddress: analysis.address,
-      tokenName: analysis.name,
-      tokenSymbol: analysis.symbol,
-      lastScore: analysis.totalScore,
-      autoProtectEnabled: false,
-      alertThreshold: 75
-    })
+    
+    try {
+      await addToWatchlist({
+        tokenAddress: analysis.address,
+        tokenName: analysis.name,
+        tokenSymbol: analysis.symbol,
+        lastScore: analysis.totalScore,
+        autoProtectEnabled: false,
+        alertThreshold: 75
+      })
+      
+      alert(`✅ ${analysis.symbol} added to watchlist!`)
+    } catch (error) {
+      console.error('Failed to add to watchlist:', error)
+      alert('❌ Failed to add to watchlist. Please try again.')
+    }
   }
 
   const getRiskColor = (level: string) => {
@@ -92,7 +113,7 @@ export const TokenScanner = () => {
               />
             </div>
             <button
-              onClick={handleScan}
+              onClick={() => handleScan()}
               disabled={isScanning || !tokenAddress}
               className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-105"
             >

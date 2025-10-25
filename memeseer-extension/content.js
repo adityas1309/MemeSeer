@@ -5,6 +5,7 @@
 'use strict';
 
 const MEMESEER_API = 'http://localhost:3000/api'; // Replace with your actual domain
+const MEMESEER_APP = 'http://localhost:3000'; // Base app URL
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 class MemeSeerInjector {
@@ -157,7 +158,6 @@ class MemeSeerInjector {
     }
   }
 
-  // Single merged fetch function (caches + sends runtime messages)
   async fetchRiskScore(address) {
     if (!address) throw new Error('No address provided to fetchRiskScore');
 
@@ -172,7 +172,6 @@ class MemeSeerInjector {
     try {
       response = await fetch(`${MEMESEER_API}/scan?address=${address}`);
     } catch (err) {
-      // Network or CORS error
       throw new Error('Network error fetching risk score: ' + err.message);
     }
 
@@ -188,13 +187,12 @@ class MemeSeerInjector {
       timestamp: Date.now()
     });
 
-    // Update stats (best-effort; content scripts can message background)
+    // Update stats
     try {
       const isHighRisk = data.riskLevel === 'HIGH' || data.riskLevel === 'CRITICAL';
       chrome.runtime.sendMessage({ action: 'incrementScanned', isHighRisk });
       chrome.runtime.sendMessage({ action: 'updateStats', data: { cacheSize: this.cache.size } });
     } catch (err) {
-      // Ignore messaging failures (e.g. runtime not available in some contexts)
       console.warn('MemeSeer: Could not send stats message', err);
     }
 
@@ -238,11 +236,12 @@ class MemeSeerInjector {
       </button>
     `;
 
-    // Add click handler for view button
+    // Add click handler for view button - FIXED: Use correct URL format
     const viewBtn = badge.querySelector('.memeseer-view-btn');
     viewBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      window.open(`${MEMESEER_API.replace('/api', '')}?scan=${address}`, '_blank');
+      // Open MemeSeer app with scan parameter
+      window.open(`${MEMESEER_APP}/?scan=${address}`, '_blank');
     });
 
     return badge;
@@ -264,12 +263,12 @@ class MemeSeerInjector {
     // Tooltip
     badge.title = `MemeSeer Risk Score: ${totalScore} (${riskLevel}) - Click to view full analysis`;
 
-    // Clickable
+    // Clickable - FIXED: Use correct URL format
     badge.style.cursor = 'pointer';
     badge.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      window.open(`${MEMESEER_API.replace('/api', '')}?scan=${address}`, '_blank');
+      window.open(`${MEMESEER_APP}/?scan=${address}`, '_blank');
     });
 
     return badge;
@@ -340,7 +339,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ success: false, message: 'Unknown action' });
   }
 
-  // Indicate async response not used
   return false;
 });
 
