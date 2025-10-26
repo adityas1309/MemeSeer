@@ -1,5 +1,5 @@
 # MemeSeer - AI-Powered Memecoin Risk Scanner
-Demo Video [https://www.youtube.com/watch?v=IGgBMtj01oU]
+Demo Video [https://youtu.be/2BdKNocj8uA]
 
 A comprehensive web3 application for analyzing and monitoring memecoin risks on the Celo blockchain. Protect yourself from rug pulls with real-time AI-powered risk assessment.
 
@@ -219,5 +219,6 @@ For issues and questions:
 - [ ] Automated protection features
 - [ ] Historical trend analysis
 - [ ] Social media integration
+
 
 
